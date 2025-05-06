@@ -1,0 +1,114 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f4f7f6;
+    color: #333;
+    margin: 0;
+    padding: 20px;
+    line-height: 1.6;
+}
+
+.letter-links a {
+    display: inline-block; /* Permite establecer ancho, alto, padding y márgenes */
+    background-color: #f0f0f0; /* Color de fondo de la celda */
+    color: #333; /* Color del texto */
+    text-decoration: none; /* Quitar subrayado */
+    padding: 10px 15px; /* Espacio dentro de la celda */
+    margin-right: 5px; /* Espacio entre celdas (horizontal) */
+    margin-bottom: 5px; /* Espacio entre filas de celdas (vertical, si se envuelven) */
+    border-radius: 5px; /* Bordes redondeados (opcional) */
+    border: 1px solid #ccc; /* Borde de la celda (opcional) */
+    font-weight: bold; /* Resaltar las letras */
+    text-align: center; /* Centrar el texto dentro de la celda */
+    min-width: 30px; /* Ancho mínimo para que todas las celdas tengan un tamaño similar */
+}
+
+.letter-links a:hover {
+    background-color: #e0e0e0; /* Cambiar color al pasar el ratón */
+    color: #007bff; /* Cambiar color del texto al pasar el ratón */
+}
+
+header {
+    background-color: #007bff;
+    color: white;
+    padding: 20px 0; 
+    text-align: center;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+header p {
+    font-size: 1.5em;
+    margin: 0;
+    font-weight: bold;
+}
+
+nav {
+    background-color: #343a;
+    padding: 10px;
+    margin-bottom: 25px;
+    border-radius: 5px;
+    box-shadow: 0 1px 3px whitesmoke;
+    text-align: center;
+}
+
+nav a {
+    color: #f8f9fa;
+    text-decoration: none;
+    padding: 10px 15px;
+    display: inline-block;
+    border-radius: 3px;
+    transition: background-color 0.3s ease;
+}
+
+nav a:hover {
+    background-color: #555;
+}
+
+main section {
+    padding: 30px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: white;
+    margin-bottom: 30px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+main section h1 {
+    font-size: 2.8em;
+    color: #28a745;
+    text-align: center;
+    margin-bottom: 25px;
+}
+
+section .letter-links {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+section .letter-links a {
+    color: #007bff;
+    text-decoration: none;
+    margin: 0 10px;
+    font-size: 1.2em;
+    font-weight: bold;
+    transition: color 0.3s ease;
+}
+
+section .letter-links a:hover {
+    color: #0056b3;
+    text-decoration: underline;
+}
+
+footer {
+    background-color: #343a40;
+    color: #f8f9fa;
+    text-align: center;
+    padding: 15px 0;
+    font-size: 0.9em;
+    border-radius: 5px;
+    box-shadow: 0 -1px 3px rgba(0, 0, 0, 0.1);
+}
+
+footer p {
+    margin: 5px 0;
+}
