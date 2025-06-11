@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulario con Validación Avanzada</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Interactive Formulary</h1>
+
+        <div class="formulary-progress">
+            <div class="progress-bar" id="progressBar">
+            </div>
+        </div>
+        <p style="text-align: center; color: grey; margin-bottom: 30px;">
+            Progress: <span id="progressPercentage">0%</span>
+        </p>
+
+        <form id="interactiveForm" 
+        novalidate>
+        <div class="form-group">
+            <label for="names">Names *</label>
+            <input
+            type="text"
+            id="names"
+            name="names"
+            required
+            autofocus
+            placeholder="Type two names"
+            pattern="[A-Za-zÁÉÍÓÚáéíóúÑñÜü ]{3,40}" />
+            <div
+            class="error-message"
+            id="errorName"></div>
+            <div
+            class="success-message"
+            id="successName"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="lastnames">Last names *</label>
+            <input
+            type="text"
+            id="lastNames"
+            name="lastNames"
+            required
+            autofocus
+            placeholder="Type two last names"
+            pattern="[A-Za-zÁÉÍÓÚáéíóúÑñÜü ]{3,40}" />
+            <div
+            class="error-message"
+            id="errorLastname"></div>
+            <div
+            class="success-message"
+            id="successLastname"></div>
+        </div>
+
+        <div class="form-group">
+        <label for="email">Email *</label>
+        <input 
+        type="email"
+        id="email"
+        name="email"
+        required
+        placeholder="usuary@dominium.com"
+        pattern="[\w-\.]+@([\w-]+\.)+[\w-]{5,50}$"/>
+        <div 
+        class="error-message"
+        id="errorEmail"></div>
+        <div
+        class="success-message"
+        id="successEmail"></div>
+        </div>
+
+        <div class="form-group">
+        <label for="confirmEmail">Confirm email *</label>
+        <input 
+        type="email"
+        id="confirmEmail"
+        name="confirmEmail"
+        required
+        placeholder="Type your email again" />
+        <div 
+        class="error-message"
+        id="errorConfirmEmail"></div>
+        <div
+        class="success-message"
+        id="successConfirmEmail"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="password">Password *</label>
+            <input
+            type="password"
+            id="password"
+            name="password"
+            required
+            placeholder="8 characters minimum"
+            minlength="8" />
+            <div
+            class="password-strenght"
+            id="strenghtBar"></div>
+            <div
+            class="error-message"
+            id="errorPassword"></div>
+            <div
+            class="success-message"
+            id="successPassword"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="confirmPassword">Confirm password *</label>
+            <input
+            type="password"
+            id="confirmPassword"
+            name="confirmPassword"
+            required
+            placeholder="Type your password again" />
+            <div
+            class="error-message"
+            id="errorConfirmPassword"></div>
+            <div
+            class="success-message"
+            id="successConfirmPassword"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="telephone">Telephone *</label>
+            <input
+            type="tel"
+            id="telephone"
+            name="telephone"
+            required
+            placeholder="300-123-4567"
+            pattern="[0-9]{3}-[0-9]{3}-[0-9]{4}" />
+            <div
+            class="error-message"
+            id="errorTelephone"></div>
+            <div
+            class="success-message"
+            id="successTelephone"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="birthDate">Birthdate *</label>
+            <input
+            type="date"
+            id="birthDate"
+            required />
+            <div
+            class="error-message"
+            id="errorDate"></div>
+            <div
+            class="success-message"
+            id="successDate"></div>
+        </div>
+
+        <div class="form-group">
+            <label for="comments">Comments</label>
+            <textarea
+            name="comments"
+            id="comments"
+            rows="4"
+            maxlength="500"
+            placeholder="Tell us about yourself (500 characters maximum)"></textarea>
+            <div class="characters-counter">
+                <span id="commentCounter">0</span>/500 characters
+            </div>
+        </div>
+
+        <div class="form-group">
+            <input
+            type="checkbox"
+            id="terms"
+            name="terms"
+            required />
+        <label
+            for="terms"
+            style="display: inline; margin-left: 8px;">
+            I accept the terms and coditions *
+        </label>
+        <div
+        class="error-message"
+        id="errorTerms"></div>
+        </div>
+
+        <div id="resumenDatos" style="display: none;">
+            <h2>Formulary Summary</h2>
+            <div id="contenidoResumen" class="summary-content">
+        </div>
+        <button type="button" id="bttnReset" class="reset-button">Reset Formulary</button>
+    </div>
+
+        <button
+          type="submit"
+          id="bttnSubmit"
+          disabled>
+          Submit Formulary
+        </button>
+        </form>
+    </div>
+
+    
+
+    <script>
+
+const formulario = document.getElementById('interactiveForm');
+const campos = formulario.querySelectorAll('input, textarea, select');
+const btnEnviar = document.getElementById('bttnSubmit');
+
+let estadoValidacion = {};
+
+campos.forEach((campo) => {
+    estadoValidacion[campo.name] = false;
+});
+
+document.getElementById('names').addEventListener('input', function() {
+    const valor = this.value.trim();
+    const nombres = valor.split(' ').filter((nombre) => nombre.length > 0);
+
+    if (valor.length < 3) {
+        mostrarError('errorName', 'Each name must have at least 3 characters');
+        marcarCampo(this, false);
+    } else if (nombres.length < 2) {
+        mostrarError('errorName', 'Type at least 2 names');
+        marcarCampo(this, false);
+    } else {
+        mostrarExito('successName', '✓ Valid Name');
+        marcarCampo(this, true);
+    }
+});
+
+document.getElementById('lastNames').addEventListener('input', function() {
+    const valor = this.value.trim();
+    const apellidos = valor.split(' ').filter((apellido) => apellido.length > 0);
+    
+    if (valor.length < 3) {
+        mostrarError('errorLastname', 'Each last name must have at least 3 characters');
+        marcarCampo(this, false);
+    } else if (apellidos.length < 2) {
+        mostrarError('errorLastname', 'Type at least 2 last names');
+        marcarCampo(this, false);
+    } else {
+        mostrarExito('successLastname', '✓ Valid Last name');
+        marcarCampo(this, true);
+    }
+});
+
+document.getElementById('email').addEventListener('input', function() {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+    if (!emailRegex.test(this.value)) {
+        mostrarError('errorEmail', 'Invalid email format');
+        marcarCampo(this, false);
+    } else {
+        mostrarExito('successEmail', '✓ Valid email');
+        marcarCampo(this, true);
+    }
+});
+
+document.getElementById('confirmEmail').addEventListener('input', function() {
+    const emailOriginal = document.getElementById('email').value;
+
+    if (this.value !== emailOriginal) {
+        mostrarError('errorConfirmEmail', 'Both emails do not coincide');
+        marcarCampo(this, false);
+    } else if (this.value.length > 0) {
+        mostrarExito('successConfirmEmail', '✓ Both emails coincide');
+        marcarCampo(this, true);
+    }
+});
+
+document.getElementById('password').addEventListener('input', function() {
+    const password = this.value;
+    const fortaleza = calcularFortalezaPassword(password);
+    actualizarBarraFortaleza(fortaleza);
+    
+    if (password.length < 8) {
+        mostrarError('errorPassword', 'The password must have at least 8 characters');
+        marcarCampo(this, false);
+    } else if (fortaleza.nivel < 2) {
+        mostrarError('errorPassword', 'The password is too weak. Add numbers and symbols');
+        marcarCampo(this, false);
+    } else {
+        mostrarExito('successPassword', `✓ Password ${fortaleza.texto}`);
+        marcarCampo(this, true);
+    }
+
+    const confirmar = document.getElementById('confirmPassword');
+    if (confirmar.value) {
+        confirmar.dispatchEvent(new Event('input'));
+    }
+});
+
+document.getElementById('confirmPassword').addEventListener('input', function() {
+    const password = document.getElementById('password').value;
+    
+    if (this.value !== password) {
+        mostrarError('errorConfirmPassword', 'Both passwords do not coincide');
+        marcarCampo(this, false);
+    } else if (this.value.length > 0) {
+        mostrarExito('successConfirmPassword', '✓ Both passwords coincide');
+        marcarCampo(this, true);
+    }
+});
+
+document.getElementById('telephone').addEventListener('input', function() {
+    let valor = this.value.replace(/\D/g, '');
+    if (valor.length >= 6) {
+        valor = valor.substring(0, 3) + '-' + valor.substring(3, 6) + '-' + valor.substring(6, 10);
+    } else if (valor.length >= 3) {
+        valor = valor.substring(0, 3) + '-' + valor.substring(3);
+    }
+    this.value = valor;
+    
+    const telefonoRegex = /^[0-9]{3}-[0-9]{3}-[0-9]{4}$/;
+    if (!telefonoRegex.test(valor)) {
+        mostrarError('errorTelephone', 'Format: 300-123-4567');
+        marcarCampo(this, false);
+    } else {
+        mostrarExito('successTelephone', '✓ Valid Telephone');
+        marcarCampo(this, true);
+    }
+});
+
+document.getElementById('birthDate').addEventListener('change', function() {
+    const fechaNacimiento = new Date(this.value);
+    const hoy = new Date();
+    const edad = hoy.getFullYear() - fechaNacimiento.getFullYear();
+    
+    if (edad < 18) {
+        mostrarError('errorDate', 'You must be 18 or older');
+        marcarCampo(this, false);
+    } else if (edad > 100) {
+        mostrarError('errorDate', 'Unvalid date');
+        marcarCampo(this, false);
+    } else {
+        mostrarExito('successDate', `✓ Age: ${edad} years old`);
+        marcarCampo(this, true);
+    }
+});
+
+document.getElementById('comments').addEventListener('input', function() {
+    const contador = document.getElementById('commentCounter');
+    contador.textContent = this.value.length;
+    
+    if (this.value.length > 450) {
+        contador.style.color = '#dc3545';
+    } else if (this.value.length > 400) {
+        contador.style.color = '#ffc107';
+    } else {
+        contador.style.color = '#666';
+    }
+    marcarCampo(this, true);
+});
+
+document.getElementById('terms').addEventListener('change', function() {
+    if (!this.checked) {
+        mostrarError('errorTerms', 'You must accept the terms and coditions');
+        marcarCampo(this, false);
+    } else {
+        ocultarMensaje('errorTerms');
+        marcarCampo(this, true);
+    }
+});
+
+function mostrarError(idElemento, mensaje) {
+    const elemento = document.getElementById(idElemento);
+    elemento.textContent = mensaje;
+    elemento.style.display = 'block';
+    ocultarMensaje(idElemento.replace('error', 'success'));
+}
+
+function mostrarExito(idElemento, mensaje) {
+    const elemento = document.getElementById(idElemento);
+    elemento.textContent = mensaje;
+    elemento.style.display = 'block';
+    ocultarMensaje(idElemento.replace('success', 'error'));
+}
+
+function ocultarMensaje(idElemento) {
+    const elemento = document.getElementById(idElemento);
+    if (elemento) elemento.style.display = 'none';
+}
+
+function marcarCampo(campo, esValido) {
+    estadoValidacion[campo.name] = esValido;
+    if (esValido) {
+        campo.classList.remove('unvalid');
+        campo.classList.add('valid');
+    } else {
+        campo.classList.remove('valid');
+        campo.classList.add('unvalid');
+    }
+    actualizarProgreso();
+    actualizarBotonEnvio();
+}
+
+function calcularFortalezaPassword(password) {
+    let puntos = 0;
+    if (password.length >= 8) puntos++;
+    if (password.length >= 12) puntos++;
+    if (/[a-z]/.test(password)) puntos++;
+    if (/[A-Z]/.test(password)) puntos++;
+    if (/[0-9]/.test(password)) puntos++;
+    if (/[^A-Za-z0-9]/.test(password)) puntos++;
+    
+    const niveles = ['too weak', 'weak', 'medium', 'strong', 'very strong'];
+    const nivel = Math.min(Math.floor(puntos / 1.2), 4);
+    return { nivel, texto: niveles[nivel], puntos };
+}
+
+function actualizarBarraFortaleza(fortaleza) {
+    const barra = document.getElementById('strenghtBar');
+    const clases = [
+        'strength-weak',
+        'strength-weak',
+        'strength-medium',
+        'strength-strong',
+        'strength-very-strong'
+    ];
+    barra.className = 'password-strength ' + clases[fortaleza.nivel];
+}
+
+function actualizarProgreso() {
+    const totalCampos = Object.keys(estadoValidacion).length;
+    const camposValidos = Object.values(estadoValidacion).filter((valido) => valido).length;
+    const porcentaje = Math.round((camposValidos / totalCampos) * 100);
+    
+    document.getElementById('progressBar').style.width = porcentaje + '%';
+    document.getElementById('progressPercentage').textContent = porcentaje + '%';
+}
+
+function actualizarBotonEnvio() {
+    const todosValidos = Object.values(estadoValidacion).every((valido) => valido);
+    btnEnviar.disabled = !todosValidos;
+}
+
+formulario.addEventListener('submit', function(e) {
+    e.preventDefault();
+    const datosFormulario = new FormData(this);
+    let resumenHTML = '';
+    
+    for (let [campo, valor] of datosFormulario.entries()) {
+        if (valor && valor.trim() !== '') {
+            const nombreCampo = obtenerNombreCampo(campo);
+            resumenHTML += `
+                <div class="dato-resumen">
+                    <span class="etiqueta-resumen">${nombreCampo}:</span> ${valor}
+                </div>
+            `;
+        }
+    }
+    
+    document.getElementById('contenidoResumen').innerHTML = resumenHTML;
+    document.getElementById('resumenDatos').style.display = 'block';
+
+    document.getElementById('resumenDatos').scrollIntoView({
+        behavior: 'smooth'
+    });
+    
+    console.log('📊 The formulary was submitted with complete validation:', Object.fromEntries(datosFormulario));
+});
+
+function obtenerNombreCampo(campo) {
+    const nombres = {
+        'names': 'Names',
+        'lastNames': 'Last names',
+        'email': 'Email',
+        'confirmEmail': 'Confirm email',
+        'password': 'Password',
+        'confirmPassword': 'Confirm password',
+        'telephone': 'Telephone',
+        'birthDate': 'Birthdate',
+        'comments': 'Comments',
+        'terms': 'Accepted terms'
+    };
+    return nombres[campo] || campo;
+}
+
+function reiniciarFormulario() {
+    formulario.reset();
+    document.getElementById('resumenDatos').style.display = 'none';
+
+    Object.keys(estadoValidacion).forEach((campo) => {
+        estadoValidacion[campo] = false;
+    });
+    
+    campos.forEach((campo) => {
+    if (campo.type === 'checkbox') {
+        estadoValidacion[campo.name] = campo.checked;
+    } else {
+        estadoValidacion[campo.name] = false;
+    }
+});
+    
+    document
+    .querySelectorAll('.error-message, .success-message')
+    .forEach((mensaje) => {
+        mensaje.style.display = 'none';
+    });
+    
+    actualizarProgreso();
+    actualizarBotonEnvio();
+    
+    document.getElementById('strengthBar').className = 'password-strength';
+
+    document.getElementById('bttnReset').addEventListener('click', reiniciarFormulario);
+    }
+    </script>
+    
+</body>
+</html>
