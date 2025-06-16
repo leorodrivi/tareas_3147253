@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Galería las Artes - Página de Arte</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="header__content">
+                <div class="logo">
+                    <h1 class="logo__text">Galería "Las Artes"</h1>
+                </div>
+
+                <nav class="nav" role="navigation" aria-label="Navegación principal">
+                    <ul class="nav__list">
+                        <li class="nav__item">
+                            <a href="#home" class="nav__link">Inicio</a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="#about" class="nav__link">Acerca de</a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="#gallery" class="nav__link">Galería</a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="#exhibitions" class="nav__link">Exposiciones</a>
+                        </li>
+                        <li class="nav__item">
+                            <a href="#contact" class="nav__link">Contacto</a>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="container">
+            <div class="hero__content">
+                <h2 class="hero__title">
+                    Explora el Mundo del Arte <br>
+                    <span class="hero__highlight">Conexión con la Belleza y la Emoción</span>
+                </h2>
+                <p class="hero__description">
+                    Un espacio dedicado a la expresión creativa, donde cada obra cuenta una historia.
+                </p>
+                <div class="hero__actions">
+                    <a href="#gallery" class="btn btn--primary">Ver Galería</a>
+                    <a href="#exhibitions" class="btn btn--secondary">Próximas Exposiciones</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <main>
+        <section id="about" class="about">
+            <div class="container">
+                <h2 class="section__title">Acerca de Nosotros</h2>
+                <div class="about__content">
+                    <div class="about__text">
+                        <p>
+                            Somos un colectivo/galería/artista individual apasionado por el arte en todas sus formas. Creemos que el arte tiene el poder de inspirar, provocar y conectar a las personas.
+                        </p>
+                        <p>
+                            Nuestra misión es presentar obras que desafíen la percepción, celebren la diversidad y ofrezcan una ventana a diferentes mundos y emociones. Desde la pintura clásica hasta las instalaciones contemporáneas, exploramos un amplio espectro de expresiones artísticas.
+                        </p>
+                    </div>
+                    <div class="about__image">
+                        <div class="placeholder-image">
+                            <span>Imagen de Arte/Entorno</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="gallery" class="gallery">
+            <div class="container">
+                <h2 class="section__title">Nuestra Galería</h2>
+                <div class="gallery__grid">
+                    <div class="gallery-item">
+                        <div class="placeholder-image"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcS_snSd989xDA42byN9pUjoz52OWf1mGzndkw&s" alt=""></div>
+                        <h3 class="gallery-item__title">"Susurros del Tiempo"</h3>
+                        <p class="gallery-item__description">Óleo sobre lienzo, 2023. Una exploración de la memoria y la nostalgia.</p>
+                        <a href="#" class="btn btn--small">Ver Detalle</a>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="placeholder-image"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRoaNGHhHNty8dGp-_dVwAl4aUA64537MXaCA&s" alt=""></div>
+                        <h3 class="gallery-item__title">"Danza de Luces"</h3>
+                        <p class="gallery-item__description">Escultura de metal reciclado, 2022. Movimiento y energía capturados.</p>
+                        <a href="#" class="btn btn--small">Ver Detalle</a>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="placeholder-image"><img src="https://bacanika.com/sites/default/files/2025-01/roberto_luis_valverde_bacanika_interna_top_desktop.webp" alt="" style="height: 200px; "></div>
+                        <h3 class="gallery-item__title">"Reflejos Urbanos"</h3>
+                        <p class="gallery-item__description">Fotografía digital, 2024. La belleza inesperada en el caos de la ciudad.</p>
+                        <a href="#" class="btn btn--small">Ver Detalle</a>
+                    </div>
+                    <div class="gallery-item">
+                        <div class="placeholder-image"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSPJw0VUGH_N33_pL4zZsHkBTjNWEGtDzt02g&s" alt=""></div>
+                        <h3 class="gallery-item__title">"El Vuelo del Pensamiento"</h3>
+                        <p class="gallery-item__description">Técnica mixta, 2023. Abstracto que invita a la introspección.</p>
+                        <a href="#" class="btn btn--small">Ver Detalle</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="exhibitions" class="exhibitions">
+            <div class="container">
+                <h2 class="section__title">Próximas Exposiciones</h2>
+                <div class="exhibitions__list">
+                    <div class="exhibition-card">
+                        <h3 class="exhibition-card__title">"Paisajes Oníricos" - Por José María Torres</h3>
+                        <p class="exhibition-card__date">15 de Julio - 30 de Agosto, 2025</p>
+                        <p class="exhibition-card__description">Una serie de pinturas que transportan al espectador a mundos de ensueño y fantasía.</p>
+                    </div>
+                    <div class="exhibition-card">
+                        <h3 class="exhibition-card__title">"Retratos del Alma" - Exposición Colectiva</h3>
+                        <p class="exhibition-card__date">10 de Septiembre - 15 de Octubre, 2025</p>
+                        <p class="exhibition-card__description">Una muestra diversa de artistas explorando la profundidad de la figura humana.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer id="contact" class="footer">
+        <div class="container">
+            <div class="footer__content">
+                <h2 class="footer__title">Conéctate con el Arte</h2>
+                <p class="footer__description">
+                    Para consultas, colaboraciones o para adquirir una obra, no dudes en contactarnos.
+                </p>
+                <div class="footer__contact">
+                    <a href="mailto:info@galeriadearte.com" class="contact-link">artesgaleria@gmail.com</a>
+                    <a href="https://instagram.com/[tuusuario]" class="contact-link" target="_blank">Instagram</a>
+                    <a href="tel:+1234567890" class="contact-link">Teléfono: +123 456 7890</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
